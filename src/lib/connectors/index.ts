@@ -2,6 +2,7 @@ import { Connection, Engine, ExecutionResult, Schema } from "@/types";
 import mysql from "./mysql";
 import postgres from "./postgres";
 import mssql from "./mssql";
+import oracle from "./oracle";
 
 export interface Connector {
   testConnection: () => Promise<boolean>;
@@ -18,6 +19,8 @@ export const newConnector = (connection: Connection): Connector => {
       return postgres(connection);
     case Engine.MSSQL:
       return mssql(connection);
+    case Engine.Oracle:
+      return oracle(connection);
     default:
       throw new Error("Unsupported engine type.");
   }

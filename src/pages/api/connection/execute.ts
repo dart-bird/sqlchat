@@ -16,10 +16,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     connection = changeTiDBConnectionToMySQL(connection);
   }
   const db = req.body.db as string;
-  const statement = req.body.statement as string;
+  let statement = req.body.statement as string;
 
   try {
     const connector = newConnector(connection);
+    if (connection.engineType === Engine.Oracle) {
+      const lastChar = statement.charAt(statement.length - 1);
+      if (lastChar === ";") {
+        statement = statement.substring(0, statement.length - 1);
+      }
+    }
     const result = await connector.execute(db, statement);
     res.status(200).json({
       data: result,

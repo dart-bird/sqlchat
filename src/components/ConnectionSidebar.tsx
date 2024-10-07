@@ -36,8 +36,10 @@ const ConnectionSidebar = () => {
   const maxToken = getModel(settingStore.setting.openAIApiConfig?.model || "").max_token;
   const [totalToken, setTotalToken] = useState<number>(0);
   const hasSchemaProperty: boolean =
-    currentConnectionCtx?.connection.engineType === Engine.PostgreSQL || currentConnectionCtx?.connection.engineType === Engine.MSSQL;
-
+    currentConnectionCtx?.connection.engineType === Engine.PostgreSQL ||
+    currentConnectionCtx?.connection.engineType === Engine.MSSQL ||
+    currentConnectionCtx?.connection.engineType === Engine.Oracle;
+  const [selectAll, setSelectAll] = useState<boolean>(false);
   useEffect(() => {
     const handleWindowResize = () => {
       if (window.innerWidth < ResponsiveWidth.sm) {
@@ -192,6 +194,15 @@ const ConnectionSidebar = () => {
     conversationStore.updateSelectedSchemaName(schemaName);
   };
 
+  const handleSelectAllTables = () => {
+    if (selectAll) {
+      conversationStore.updateSelectedTablesNameList([]);
+    } else {
+      const allTableNames = tableList.map((table) => table.name);
+      conversationStore.updateSelectedTablesNameList(allTableNames);
+    }
+    setSelectAll(!selectAll);
+  };
   return (
     <>
       <Drawer
@@ -229,6 +240,13 @@ const ConnectionSidebar = () => {
                   </button>
                 )
               )}
+              <button
+                onClick={handleSelectAllTables}
+                className="flex space-x-1 items-center justify-center mb-2 w-full px-2 py-1 border rounded-lg dark:text-gray-300 bg-white dark:bg-zinc-700 hover:bg-gray-100 dark:hover:bg-zinc-800"
+              >
+                <Icon.BiCheckSquare className="h-6 w-auto" />
+                <span>{selectAll ? t("connection.deselect-all") : t("connection.select-all")}</span>
+              </button>
               {databaseList.length > 0 && (
                 <div className="w-full sticky top-0 z-1">
                   <Select
@@ -278,7 +296,7 @@ const ConnectionSidebar = () => {
                   tableList.length > 0 &&
                   tableList.map((table) => {
                     return (
-                      <div key={table.name}>
+                      <div key={table.name} title={table.name}>
                         <Checkbox
                           value={selectedTableNameList.includes(table.name)}
                           label={table.name}

@@ -7,6 +7,7 @@ export enum Engine {
   TiDB = "TiDB",
   Snowflake = "SNOWFLAKE",
   Hive = "HIVE",
+  Oracle = "Oracle",
 }
 
 export interface SSLOptions {
@@ -25,7 +26,7 @@ export interface Connection {
   port: string;
   username: string;
   password: string;
-  // database is only required for PostgreSQL.
+  // database is only required for PostgreSQL, Oracle.
   database?: string;
   // encrypt is only required for MSSQL.
   encrypt?: boolean;

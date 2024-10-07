@@ -59,6 +59,11 @@ const engines = [
     name: "TiDB Serverless",
     defaultPort: "4000",
   },
+  {
+    type: Engine.Oracle,
+    name: "Oracle",
+    defaultPort: "1521",
+  },
   // {
   //   type: Engine.Snowflake,
   //   name: "Snowflake",
@@ -90,7 +95,7 @@ const CreateConnectionModal = (props: Props) => {
   const [sslType, setSSLType] = useState<SSLType>("preferred");
   const [selectedSSLField, setSelectedSSLField] = useState<SSLFieldType>("ca");
   const [isRequesting, setIsRequesting] = useState(false);
-  const showDatabaseField = connection.engineType === Engine.PostgreSQL;
+  const showDatabaseField = connection.engineType === Engine.PostgreSQL || connection.engineType === Engine.Oracle;
   const isEditing = editConnection !== undefined;
   const allowSave = connection.title !== "" && connection.host !== "" && connection.username !== "";
 
