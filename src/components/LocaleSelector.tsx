@@ -20,6 +20,10 @@ const localeItemList: LocaleItem[] = [
     value: "es",
     label: "Español",
   },
+  {
+    value: "ko",
+    label: "한국어",
+  },
 ];
 
 const LocaleSelector = () => {
