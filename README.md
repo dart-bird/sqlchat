@@ -83,7 +83,6 @@ docker run --name sqlchat --platform linux/amd64 --env NEXTAUTH_SECRET="$(openss
 
 - `NEXT_PUBLIC_ALLOW_SELF_OPENAI_KEY`: Set to `true` to allow users to bring their own OpenAI API key.
 
-
 ### Database related
 
 - `NEXT_PUBLIC_USE_DATABASE`: Set to `true` to start SQL Chat with database. This will

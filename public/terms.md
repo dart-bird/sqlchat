@@ -1,11 +1,10 @@
 # Terms of Service
 
-*Last Updated: May 21, 2023*
+_Last Updated: May 21, 2023_
 
 ## Refund Policy
 
 All fees and charges are earned upon receipt by us and are nonrefundable.
-
 
 ## Contact Us
 

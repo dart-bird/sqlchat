@@ -163,7 +163,6 @@ docker run --name sqlchat --platform linux/amd64 --env NEXTAUTH_SECRET="$(openss
 </p>
 </details>
 
-
 <details><summary>如何自托管 SQL Chat?</summary>
 <p>
 
@@ -189,7 +188,6 @@ docker run --name sqlchat --platform linux/amd64 --env NEXTAUTH_SECRET="$(openss
 
 </p>
 </details>
-
 
 <details><summary>Failed to request message, please check your network</summary>
 <p>
