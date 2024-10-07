@@ -15,7 +15,30 @@ const DataTableView = (props: Props) => {
     return {
       name: key,
       sortable: true,
-      selector: (row: any) => row[key],
+      selector: (row: any) => (row[key] === null ? "" : row[key]),
+      cell: (row: any) => {
+        const value = row[key];
+        if (value === null) {
+          return <span style={{ color: "#B2B8C168" }}>null</span>;
+        }
+        if (typeof value === "object") {
+          return <span style={{ color: "#B2B8C168" }}>[object]</span>;
+        }
+        return (
+          <div
+            style={{
+              maxWidth: "240px",
+              maxHeight: "50px",
+              overflow: "auto",
+              whiteSpace: "normal",
+              borderRadius: "4px",
+            }}
+            title={value}
+          >
+            {value}
+          </div>
+        );
+      },
     };
   });
 
@@ -25,14 +48,18 @@ const DataTableView = (props: Props) => {
       <span className="text-sm font-mono text-gray-500 mt-2">{t("execution.message.no-data")}</span>
     </div>
   ) : (
-    <DataTable
-      className="w-full border !rounded-lg dark:border-zinc-700"
-      columns={columns}
-      data={rawResults}
-      fixedHeader
-      pagination
-      responsive
-    />
+    <div style={{ overflowX: "scroll", width: "100%" }}>
+      {" "}
+      {/* for scroll x container */}
+      <DataTable
+        className="w-full border !rounded-lg dark:border-zinc-700"
+        columns={columns}
+        data={rawResults}
+        fixedHeader
+        pagination
+        responsive
+      />
+    </div>
   );
 };
 

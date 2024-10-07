@@ -158,6 +158,7 @@ const QueryDrawer = () => {
                   )}
                 </>
               )}
+              <span className="opacity-70">SHIFT + MOUSE SCROLL </span>
             </div>
           </>
         )}
