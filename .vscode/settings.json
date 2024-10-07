@@ -1,4 +1,6 @@
 {
+  "editor.tabSize": 2,
+  "files.eol": "\n",
   "i18n-ally.localesPaths": ["src/locales"],
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
